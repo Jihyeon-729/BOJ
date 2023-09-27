@@ -19,11 +19,9 @@ vector<int> solution(vector<string> maps) {
     width = maps[0].size();
     for(int i=0; i<maps.size(); i++) {
         for(int j=0; j<maps[0].size(); j++) {
-            // cout << "(i,j)=(" << i << "," << j << ")\n";
             // elem is part of unknown island
             if(maps[i][j] != 'X' && !visited[i][j]){
                 days = DFS(i, j, width, maps);
-                //cout << days << " ";
                 answer.push_back(days);
             }
         }
@@ -37,22 +35,11 @@ vector<int> solution(vector<string> maps) {
 }
 
 
-// 앞으로 DFS, BFS format은 cy, cx로 다 통일하자
+// 앞으로 DFS, BFS format은 cy, cx로 다 통일하자 -> ny, nx 순서 때문에 헷갈려서 오래걸림
 int DFS(int cy, int cx, int width, vector<string> maps) {
     int nx, ny, days;
     days = maps[cy][cx] - '0';
     visited[cy][cx] = true;
-
-    /* for debugging
-    cout << "cy,cx in DFS = (" << cy << "," << cx << ")\n";
-    for(int i=0; i<maps.size(); i++) {
-            for(int j=0; j<maps[0].size(); j++) {
-                    cout << visited[i][j] << " ";
-            }
-            cout << "\n";
-    }
-    */
-
 
     for(int i=0; i<4; i++) {
         nx = cx + dx[i]; ny = cy + dy[i];
