@@ -1,8 +1,43 @@
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
+bool visited[201];
+
+void DFS(int from, int n, vector<vector<int>> computers);
+
+int solution(int n, vector<vector<int>> computers) {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+    
+    int ans = 0;
+    for(int i=0; i<n; i++) {
+        // 노드 i 체크한 적 없으면
+        if(!visited[i]) {
+            for(int j=0; j<n; j++) {
+                if (i==j) continue;
+                // 연결된 노드 중 체크한 적 없는 노드 탐색
+                if (!visited[j] && computers[i][j]==1) DFS(j, n, computers);
+            }
+            ans++;
+        }
+    }
+    
+    return ans;
+}
+
+void DFS(int from, int n, vector<vector<int>> computers) {
+    visited[from] = true;
+    
+    for(int i=0; i<n; i++) {
+        if(from == i) continue;
+        if(!visited[i] && computers[from][i]==1) DFS(i, n, computers);
+    }
+}
+
+/*
 void DFS(int n, int from, int cnt, vector<int> &checked, vector<vector<int>> computers);
 
 int solution(int n, vector<vector<int>> computers) {
@@ -32,3 +67,4 @@ void DFS(int n, int from, int cnt, vector<int> &checked, vector<vector<int>> com
     }
     return;
 }
+*/
