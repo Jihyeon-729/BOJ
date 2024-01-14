@@ -1,0 +1,28 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int solution(int k, vector<vector<int>> dungeons) {
+    int answer = -1;
+    vector<pair<int, vector<int>>> dgs;
+    for(int i=0; i<dungeons.size(); i++) {
+        dgs.push_back({i, dungeons[i]});
+    }
+    sort(dgs.begin(), dgs.end());
+    do {
+        int aa, kk;
+        aa = 0; kk = k;
+        for(int i=0; i<dgs.size(); i++) {
+            if(kk >= (dgs[i].second)[0]) {
+                kk -= (dgs[i].second)[1];
+                aa += 1;
+            }
+        }
+        if (aa>answer) answer = aa;
+    } while(next_permutation(dgs.begin(), dgs.end()));
+    
+    return answer;
+}
