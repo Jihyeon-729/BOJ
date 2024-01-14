@@ -1,0 +1,32 @@
+#include <string>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+int numOfOnes(int n);
+
+int solution(int n) {
+    int answer;
+    int num = numOfOnes(n);
+    for(answer=n+1; ; answer++) {
+        if(num == numOfOnes(answer)) break;
+    }
+    
+    return answer;
+}
+    
+// n을 이진수로 변환했을 때 1의 개수
+int numOfOnes(int n) {
+    int i=1, num=0;
+    while(i<=n) {
+        i*=2; 
+    } i/=2;
+    while(n>=0 && i>0) {
+        if(n-i>=0) {
+            n-=i;
+            num++;
+        } i/=2;
+    } num--;
+    return num;
+}
